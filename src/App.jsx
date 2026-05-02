@@ -1,4 +1,5 @@
 ﻿import { Routes, Route } from 'react-router-dom'
+import { CartProvider } from './context/CartContext'
 import Header from './components/Header/Header'
 import ProductListPage from './pages/ProductListPage/ProductListPage'
 import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage'
@@ -6,7 +7,7 @@ import './App.css'
 
 function App() {
   return (
-    <>
+    <CartProvider>
       <Header />
       <main className="main-content">
         <Routes>
@@ -14,7 +15,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetailPage />} />
         </Routes>
       </main>
-    </>
+    </CartProvider>
   )
 }
 

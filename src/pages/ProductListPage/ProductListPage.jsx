@@ -99,7 +99,17 @@ function ProductListPage() {
         <SearchBar value={query} onChange={setQuery} />
       </div>
 
-      {loading && <p className="plp__status">Cargando productos...</p>}
+      {loading && (
+        <ul className="plp__grid" aria-hidden="true">
+          {Array.from({ length: PAGE_SIZE }).map((_, i) => (
+            <li key={i} className="plp__skeleton-card">
+              <div className="plp__skeleton-img" />
+              <div className="plp__skeleton-line plp__skeleton-line--title" />
+              <div className="plp__skeleton-line plp__skeleton-line--sub" />
+            </li>
+          ))}
+        </ul>
+      )}
       {error && <p className="plp__status plp__status--error">Error al cargar los productos: {error}</p>}
 
       {!loading && !error && filtered.length === 0 ? (

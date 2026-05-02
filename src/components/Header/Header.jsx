@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FiSmartphone, FiShoppingCart } from 'react-icons/fi'
+import { useCart } from '../../context/CartContext'
+import CartDropdown from '../CartDropdown/CartDropdown'
 import './Header.css'
 
 const SEGMENT_LABELS = {
@@ -9,6 +12,8 @@ const SEGMENT_LABELS = {
 
 function Header() {
   const location = useLocation()
+  const { cartCount } = useCart()
+  const [cartOpen, setCartOpen] = useState(false)
 
   const crumbs = location.pathname
     .split('/')
@@ -36,9 +41,14 @@ function Header() {
             </span>
           ))}
         </nav>
-        <div className="header__cart">
-          <FiShoppingCart size={20} />
-          <span className="header__cart-count">0</span>
+        <div className="header__cart-wrap">
+          <button className="header__cart" onClick={() => setCartOpen(o => !o)} aria-label="Ver carrito">
+            <FiShoppingCart size={20} />
+            <span className="header__cart-count">{cartCount}</span>
+          </button>
+          {cartOpen && (
+            <CartDropdown onClose={() => setCartOpen(false)} />
+          )}
         </div>
       </div>
     </header>

@@ -93,3 +93,172 @@
   font-weight: 700;
   padding: 0 5px;
 }
+
+.header__cart-wrap {
+  position: relative;
+}
+
+.header__cart {
+  background: none;
+  font-family: inherit;
+}
+
+.header__cart-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  width: 340px;
+  background: #0d0d1f;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+  z-index: 200;
+  overflow: hidden;
+}
+
+/* flecha decorativa apuntando al botón */
+.header__cart-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 18px;
+  width: 12px;
+  height: 12px;
+  background: #0d0d1f;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  transform: rotate(45deg);
+}
+
+.header__cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.1rem 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.header__cart-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition: color 0.15s;
+  font-family: inherit;
+}
+
+.header__cart-close:hover {
+  color: rgba(255,255,255,0.9);
+}
+
+.header__cart-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: rgba(255,255,255,0.25);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.header__cart-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+  max-height: 380px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.header__cart-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s;
+}
+
+.header__cart-item:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.header__cart-item:last-child {
+  border-bottom: none;
+}
+
+.header__cart-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+  padding: 4px;
+}
+
+.header__cart-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.header__cart-name {
+  font-size: 0.85rem;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.header__cart-opts {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.header__cart-qty {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 0.15rem 0.45rem;
+  flex-shrink: 0;
+}
+
+.header__cart-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.header__cart-remove {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.header__cart-remove:hover {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.12);
+}

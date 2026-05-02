@@ -26,6 +26,9 @@ function setCache(key, data) {
 }
 // Devolvemos la promesa para que el componente pueda manejar loading/error, aunque internamente use cache y fetch según el caso
 async function get(path) {
+
+  // Esperamos 1.5s para simular latencia de red y poder apreciar mejor las animaciones de carga, aunque la cache se devuelva instantáneamente. En un caso real, no haríamos esto, pero como el API es muy rápida, nos ayuda a visualizar mejor los estados de carga y las animaciones.
+  // await new Promise(resolve => setTimeout(resolve, 1500))
   const key = `cache:${path}`
   const cached = getCached(key)
   if (cached) return cached
@@ -48,7 +51,8 @@ export async function getProduct(id) {
   return get(`/product/${id}`)
 }
 
-// Devolvemos la promesa para que el componente pueda manejar loading/error
+// Devolvemos la promesa para que el componente pueda manejar loading/error.
+// !!!! Siempre devuelve { count: 1 }, asi que guardaremos en cache los productos añadidos al carro para reflejar conteo
 export async function addToCart({ id, colorCode, storageCode }) {
   const res = await fetch(`${BASE_URL}/cart`, {
     method: 'POST',
