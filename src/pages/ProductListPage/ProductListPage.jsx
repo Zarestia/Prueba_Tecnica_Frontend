@@ -2,18 +2,28 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/ProductCard/ProductCard'
-import { MOCK_PRODUCTS } from '../../mocks'
+import { getProducts } from '../../services/api'
 import './ProductListPage.css'
 
 const PAGE_SIZE = 8
 
 function ProductListPage() {
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [query, setQuery] = useState('')
   const [visible, setVisible] = useState(PAGE_SIZE)
   const sentinelRef = useRef(null)
   const observerRef = useRef(null)
 
-  const filtered = MOCK_PRODUCTS.filter(p => {
+  useEffect(() => {
+    getProducts()
+      .then(data => setProducts(data))
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const filtered = products.filter(p => {
     const q = query.toLowerCase()
     return p.brand.toLowerCase().includes(q) || p.model.toLowerCase().includes(q)
   })
@@ -89,7 +99,10 @@ function ProductListPage() {
         <SearchBar value={query} onChange={setQuery} />
       </div>
 
-      {filtered.length === 0 ? (
+      {loading && <p className="plp__status">Cargando productos...</p>}
+      {error && <p className="plp__status plp__status--error">Error al cargar los productos: {error}</p>}
+
+      {!loading && !error && filtered.length === 0 ? (
         <p className="plp__empty">No hay resultados para "{query}"</p>
       ) : (
         <>

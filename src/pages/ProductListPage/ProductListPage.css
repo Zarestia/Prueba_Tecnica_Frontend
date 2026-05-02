@@ -4,6 +4,17 @@
   padding: 0 1.5rem;
 }
 
+.plp__status {
+  text-align: center;
+  padding: 3rem 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.plp__status--error {
+  color: #e63946;
+}
+
 .plp__toolbar {
   display: flex;
   align-items: center;
