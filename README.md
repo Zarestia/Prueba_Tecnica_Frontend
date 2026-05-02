@@ -1,16 +1,44 @@
-# React + Vite
+# Prueba Tecnica Frontend - Mobile Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación SPA para explorar y comprar dispositivos móviles. Prueba técnica front-end.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm start       # Modo desarrollo (Vite dev server)
+npm run build   # Compilación para producción
+npm test        # Lanzamiento de tests (Vitest)
+npm run lint    # Comprobación de código (ESLint)
+```
 
-## React Compiler
+## Requisitos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 18+
+- npm 9+
 
-## Expanding the ESLint configuration
+## Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 19** + **Vite 8**
+- **react-router-dom v7** — Enrutado SPA de cliente
+- **GSAP** — Animaciones de entrada en tarjetas y detalle de producto
+- **react-icons** — Iconografía
+- **Vitest** + **@testing-library/react** — Testing
+
+## API
+
+Base URL: `https://itx-frontend-test.onrender.com/api`
+
+| Endpoint | Descripción |
+|---|---|
+| `GET /product` | Listado de productos |
+| `GET /product/:id` | Detalle de producto |
+| `POST /cart` | Añadir producto a la cesta |
+
+Los datos del API se cachean en `localStorage` durante 1 hora. Pasado ese tiempo se revalida la petición automáticamente.
+
+## Decisiones técnicas
+
+- **Infinite scroll** mediante `IntersectionObserver` sobre un sentinel, mostrando los productos de 8 en 8 para no montar todos los nodos a la vez.
+- **Skeleton loading** en listado y detalle de productos para mejorar la percepción de carga.
+- **CartContext** persiste el carrito en `localStorage` (items + count) para que sobreviva a recargas, ya que la API siempre devuelve `{ count: 1 }`
+- Sin CSS frameworks — Estilos propios con CSS Modules por componente.
